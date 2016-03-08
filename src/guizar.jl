@@ -43,7 +43,7 @@ function Guizar(p::Int, R, N::Int)
 end
 
 import Base.call
-function call(gt::Guizar, v::AbstractVector)
+function call(gt::Guizar, v::AbstractArray)
     F1 = (v./gt.Jp1)*gt.R
     F2 = gt.T*F1
     gt.ν,F2.*gt.Jp1/gt.V
