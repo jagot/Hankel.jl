@@ -15,7 +15,7 @@ and \[\mathsf{T}_{mn}=\frac{2J_p(\alpha_{pn}\alpha_{pm}/S)}{|J_{p+1}(\alpha_{pn}
 \(f_1\) is assumed to be sampled on these gridpoints.
 =#
 
-export Guizar, call, guizar
+export Guizar, guizar
 
 using GSL
 
@@ -42,14 +42,13 @@ function Guizar(p::Int, R, N::Int)
     Guizar(p,R,N,r,ν,V,Jp1,T)
 end
 
-import Base.call
-function call(gt::Guizar, v::AbstractArray)
+function (gt::Guizar)(v::AbstractArray)
     F1 = (v./gt.Jp1)*gt.R
     F2 = gt.T*F1
     gt.ν,F2.*gt.Jp1/gt.V
 end
 
-function call(gt::Guizar, f1::Function)
+function (gt::Guizar)(f1::Function)
     gt(f1(gt.r))
 end
 
